@@ -38,7 +38,3 @@ export default class WaveCanvas {
 
     }
 }
-
-window.onload = () => {
-    new App();
-}
