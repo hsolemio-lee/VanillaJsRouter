@@ -3,18 +3,24 @@ import {
 } from './wavegroup.js';
 
 export default class WaveCanvas {
-    constructor() {
-        this.canvas = document.createElement('canvas');
-        this.ctx = this.canvas.getContext('2d');
+    constructor(el) {
+        if(!this.canvas) {
+            this.canvas = document.createElement('canvas');
+            this.ctx = this.canvas.getContext('2d');
 
-        document.getElementById('root').appendChild(this.canvas);
+            el.appendChild(this.canvas);
 
-        this.waveGroup = new WaveGroup();        
+            this.waveGroup = new WaveGroup();        
+            
+            window.addEventListener('resize', this.resize.bind(this), false);
+            this.resize();
+
+            window.requestAnimationFrame(this.animate.bind(this));
+        } else {
+            el.appendChild(this.canvas);
+        }
         
-        window.addEventListener('resize', this.resize.bind(this), false);
-        this.resize();
-
-        window.requestAnimationFrame(this.animate.bind(this));
+        return this;
     }
 
     resize() {

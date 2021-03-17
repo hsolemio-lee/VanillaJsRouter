@@ -3,18 +3,23 @@ import {
 } from './ball.js';
 
 export default class BallCanvas {
-    constructor() {
-        this.canvas = document.createElement('canvas');
-        this.ctx = this.canvas.getContext('2d');
+    constructor(el) {
+        if(!this.canvas) {
+            this.canvas = document.createElement('canvas');
+            this.ctx = this.canvas.getContext('2d');
 
-        document.getElementById('root').appendChild(this.canvas);
+            el.appendChild(this.canvas);
 
-        window.addEventListener('resize', this.resize.bind(this), false);
-        this.resize();
+            window.addEventListener('resize', this.resize.bind(this), false);
+            this.resize();
 
-        this.ball = new Ball(this.stageWidth, this.stageHeight, 60, 5);
+            this.ball = new Ball(this.stageWidth, this.stageHeight, 60, 5);
 
-        window.requestAnimationFrame(this.animate.bind(this));
+            window.requestAnimationFrame(this.animate.bind(this));
+        } else {
+            el.appendChild(this.canvas);
+        }
+        return this;
     }
 
     resize() {

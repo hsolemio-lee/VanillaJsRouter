@@ -9,7 +9,8 @@ export const routes = [
         menu: 'ballCanvas',
         pageName : 'Ball Canvas',
         component: function () {
-            new BallCanvas();
+            const root = document.getElementById('root');
+            return new BallCanvas(root);
         }
     },
     {
@@ -18,7 +19,8 @@ export const routes = [
         menu: 'waveCanvas',
         pageName : 'Wave Canvas',
         component: function () {
-            new WaveCanvas();
+            const root = document.getElementById('root');
+            return new WaveCanvas(root);
         }
     },
     {
@@ -27,7 +29,8 @@ export const routes = [
         menu: 'glowCanvas',
         pageName : 'Glow Canvas',
         component: function () {
-            new GlowCanvas();
+            const root = document.getElementById('root');
+            return new GlowCanvas(root);
         }
     },
 ]
@@ -39,8 +42,10 @@ export class Router {
         div.setAttribute('id', 'root');
         document.body.appendChild(div);
 
-        this.el = div;
+        this.page = null;
         
+        this.render.bind(this);
+
         this.render();
         window.addEventListener('hashchange', this.render);
         window.addEventListener('DOMContentLoaded', this.render);
@@ -58,11 +63,11 @@ export class Router {
 			const { url, menu, component, pageName} = routes.find(route => route.hash === hash);
 			
 			if (!url) {
-			    this.page.innerHTML = `${hash} Not Found`;
 				return;
 			}
 			root.innerHTML = '';
-            component();
+            this.page = null;
+            this.page = component();
 			
 		} catch (err) {
 			console.error(err);
