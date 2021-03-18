@@ -43,7 +43,7 @@ export class Router {
 			const hash = location.hash.replace('#', '').split('?')[0];
             if (hash === '') {
                 root.innerHTML = '';
-                routes[0].component();
+                routes[0].component.render(root);
                 return;        
             }
 			const { url, menu, component, pageName} = routes.find(route => route.hash === hash);

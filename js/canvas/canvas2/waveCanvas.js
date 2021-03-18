@@ -11,6 +11,8 @@ export default class WaveCanvas {
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
 
+        window.requestAnimationFrame(this.animate.bind(this));
+        
         this.render.bind(this);
         return this;
     }
@@ -37,7 +39,6 @@ export default class WaveCanvas {
     }
 
     render(el) {
-        window.requestAnimationFrame(this.animate.bind(this));
         el.appendChild(this.canvas);
     }
 }

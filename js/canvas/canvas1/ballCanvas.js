@@ -10,10 +10,11 @@ export default class BallCanvas {
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
 
-        this.ball = new Ball(this.stageWidth, this.stageHeight, 60, 5);
+        this.ball = new Ball(this.stageWidth, this.stageHeight, 60, 30);
         
-        this.render.bind(this);
+        window.requestAnimationFrame(this.animate.bind(this));
 
+        this.render.bind(this);
         return this;
     }
 
@@ -35,7 +36,6 @@ export default class BallCanvas {
     }
 
     render(el) {
-        window.requestAnimationFrame(this.animate.bind(this));
         el.appendChild(this.canvas);
     }
 }
