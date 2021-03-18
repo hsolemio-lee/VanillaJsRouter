@@ -8,40 +8,26 @@ export const routes = [
         url: '/canvas1',
         menu: 'ballCanvas',
         pageName : 'Ball Canvas',
-        component: function () {
-            const root = document.getElementById('root');
-            return new BallCanvas(root);
-        }
+        component: new BallCanvas()
     },
     {
         hash: 'canvas2',
         url: '/canvas2',
         menu: 'waveCanvas',
         pageName : 'Wave Canvas',
-        component: function () {
-            const root = document.getElementById('root');
-            return new WaveCanvas(root);
-        }
+        component: new WaveCanvas()
     },
     {
         hash: 'canvas3',
         url: '/canvas3',
         menu: 'glowCanvas',
         pageName : 'Glow Canvas',
-        component: function () {
-            const root = document.getElementById('root');
-            return new GlowCanvas(root);
-        }
+        component: new GlowCanvas()
     },
 ]
 
 export class Router {
     constructor() {
-        
-        let div = document.createElement('div');
-        div.setAttribute('id', 'root');
-        document.body.appendChild(div);
-
         this.page = null;
         
         this.render.bind(this);
@@ -66,11 +52,12 @@ export class Router {
 				return;
 			}
 			root.innerHTML = '';
-            this.page = null;
-            this.page = component();
+
+            component.render(root);
 			
 		} catch (err) {
 			console.error(err);
 		}
     }
 }
+

@@ -11,29 +11,22 @@ const COLORS = [
 
 
 export default class GlowCanvas {
-    constructor(el) {
-        if(!this.canvas) {
-            this.canvas = document.createElement('canvas');
-            this.ctx = this.canvas.getContext('2d');
+    constructor() {
+        this.canvas = document.createElement('canvas');
+        this.ctx = this.canvas.getContext('2d');
 
-            el.appendChild(this.canvas);
-            
+        this.pixelRatio = (window.devicePixelRatio > 1) ? 2 : 1;
 
-            this.pixelRatio = (window.devicePixelRatio > 1) ? 2 : 1;
+        this.totalParticles = 20;
+        this.particles = [];
+        this.maxRadius = 900;
+        this.minRadius = 500;
 
-            this.totalParticles = 20;
-            this.particles = [];
-            this.maxRadius = 900;
-            this.minRadius = 500;
+        window.addEventListener('resize', this.resize.bind(this), false);
+        this.resize();
 
-            window.addEventListener('resize', this.resize.bind(this), false);
-            this.resize();
-
-            window.requestAnimationFrame(this.animate.bind(this));
-        } else {
-            el.appendChild(this.canvas);
-            
-        }        
+        this.render.bind(this);
+         
         
         return this;
     }
@@ -79,5 +72,10 @@ export default class GlowCanvas {
             item.animate(this.ctx, this.stageWidth, this.stageHeight)
         }
 
+    }
+
+    render(el) {
+        window.requestAnimationFrame(this.animate.bind(this));
+        el.appendChild(this.canvas);
     }
 }
