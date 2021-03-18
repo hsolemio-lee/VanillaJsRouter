@@ -5,22 +5,16 @@ import GlowCanvas from './canvas/canvas3/glowCanvas.js';
 export const routes = [
     {
         hash: 'canvas1',
-        url: '/canvas1',
-        menu: 'ballCanvas',
         pageName : 'Ball Canvas',
         component: new BallCanvas()
     },
     {
         hash: 'canvas2',
-        url: '/canvas2',
-        menu: 'waveCanvas',
         pageName : 'Wave Canvas',
         component: new WaveCanvas()
     },
     {
         hash: 'canvas3',
-        url: '/canvas3',
-        menu: 'glowCanvas',
         pageName : 'Glow Canvas',
         component: new GlowCanvas()
     },
@@ -46,9 +40,9 @@ export class Router {
                 routes[0].component.render(root);
                 return;        
             }
-			const { url, menu, component, pageName} = routes.find(route => route.hash === hash);
+			const { pageName, component} = routes.find(route => route.hash === hash);
 			
-			if (!url) {
+			if (!pageName) {
 				return;
 			}
 			root.innerHTML = '';
