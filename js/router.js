@@ -1,6 +1,8 @@
 import BallCanvas from './canvas/canvas1/ballCanvas.js';
 import WaveCanvas from './canvas/canvas2/waveCanvas.js';
 import GlowCanvas from './canvas/canvas3/glowCanvas.js';
+import PostitCanvas from './canvas/canvas4/postitCanvas.js';
+
 
 export const routes = [
     {
@@ -17,6 +19,11 @@ export const routes = [
         hash: 'canvas3',
         pageName : 'Glow Canvas',
         component: new GlowCanvas()
+    },
+	{
+        hash: 'canvas4',
+        pageName : 'Postit Canvas',
+        component: new PostitCanvas()
     },
 ]
 
